@@ -14,3 +14,13 @@ client.once(Events.ClientReady, (clientUser) => {
 })
 
 client.login(process.env.BOT_TOKEN)
+
+const BOT_CHANNEL ="1093540186853474397"
+
+client.on(Events.MessageCreate, (message)=>{
+    if(message.author.bot) return
+    if(message.channel.id !== BOT_CHANNEL) return
+
+    console.log(message.content)
+})
+
