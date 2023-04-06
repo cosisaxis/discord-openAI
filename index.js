@@ -33,7 +33,7 @@ client.on(Events.MessageCreate, async (message)=>{
 
     let messages = Array.from(await message.channel.messages.fetch({
         limit:PAST_MESSAGES,
-        befre:message.id
+        before:message.id
     }))
 
     messages = messages.map(m=>m[1])
