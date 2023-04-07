@@ -72,6 +72,21 @@ message.channel.sendTyping()
 ```
 This code is essentially fetching the past 5 messages(That's the number we provided in the `PAST_MESSAGES` variable earlier) and converting them into an array using the `Array.from()` method which makes it a lot easier to manipulate. `message.channel` is the channel the message was sent in, and message.id is the ID of the current message. limit is the maximum number of messages to fetch. In the end the `messages` variable will consist of the last 5 messages plus the current one.
 
+```javascript
+messages = messages.map(m=>m[1])
+messages.unshift(message)
+```
+We are using this piece of code to modify the the `messages` array. `messages = messages.map(m=>m[1])` This code maps the messages array to a new array that contains only the second element of each tuple. `messages.unshift(message)` adds the message object to the the front of the messages array so it essentially includes the most recent messages first.
+
+```javascript
+
+let users =[...new Set([...messages.map(m=> m.member.displayName), client.user.username])]
+ let lastUser = users.pop()
+let prompt = `Conversation between two parties ${users.join(", ")}, and ${lastUser}. \n\n`
+```
+We are creating an array of unique users who have sent messages in a conversation. It does this by mapping over the `messages` array and extracting the `displayName` property of the member object of each message. The new Set() function is then used to remove duplicates from the array, and the spread operator ... is used to spread the values into a new array. This array is then assigned to the users variable. `let lastUser = users.pop()` is there to remove and retrieve the last element from the
+`users` array and assign it to the `lastUser` variable. `let prompt` = `Conversation between two parties ${users.join(", ")}, and ${lastUser}. \n\n` This prompt variable will return a string that is used to act as a prompt for the OpenAI API to generate a response.
+
 
 
 
