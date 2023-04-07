@@ -51,7 +51,26 @@ const PAST_MESSAGES = 5
 client.on(Events.MessageCreate, async (message)=>{
 })
 ```
-This piece of code sets up an event listener for when a message is created in the channel. I'll explain the code inside it below
+This piece of code sets up an event listener for when a message is created in the channel. I'll explain the code inside it below.
+
+```javascript
+ if(message.author.bot) return
+ if(message.channel.id !== BOT_CHANNEL) return
+```
+These if statements check if the sender of the message is a bot and if the message is being sent in the right channel.
+
+```javascript
+message.channel.sendTyping()
+```
+`message.channel.sendTyping()` is a method in the Discord.js library that allows the bot to indicate that a message is being typed.
+
+```javascript
+ let messages = Array.from(await message.channel.messages.fetch({
+        limit:PAST_MESSAGES,
+        before:message.id
+    }))
+```
+This code is essentially fetching the past 5 messages(That's the number we provided in the `PAST_MESSAGES` variable earlier) and converting them into an array using the `Array.from()` method which makes it a lot easier to manipulate. `message.channel` is the channel the message was sent in, and message.id is the ID of the current message. limit is the maximum number of messages to fetch. In the end the `messages` variable will consist of the last 5 messages plus the current one.
 
 
 
