@@ -15,3 +15,19 @@ const config = new Configuration({
 })
 ```
 We are essentially creating an object here that was provided by the `Configuration`class from the openAI api to to authenticate the client using the provided API key, which is required to access and use the API.
+
+```javascript
+const openai = new OpenAIApi(config)
+```
+In the `openai` we are creating a new instance of the `OpenAIApi`using the configuration settings of the config object. This code is essentially providing an interface to interact with the api and the config provided the api key needed to authenticate the responses from said api.
+
+```javascript
+const client = new Client({
+    intents:[
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
+})
+```
+This code is creating a new instance with 3 specific intents. Intents are used to determine which events a client should listen to and receive updates about.  In this case, the client is set to listen to events related to guilds (servers), messages sent in guild channels, and message contents. This means that the bot will only receive updates about these events, and not others, which can help reduce unnecessary data transfer and improve performance.
