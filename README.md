@@ -31,3 +31,29 @@ const client = new Client({
 })
 ```
 This code is creating a new instance with 3 specific intents. Intents are used to determine which events a client should listen to and receive updates about.  In this case, the client is set to listen to events related to guilds (servers), messages sent in guild channels, and message contents. This means that the bot will only receive updates about these events, and not others, which can help reduce unnecessary data transfer and improve performance.
+
+```javascript
+client.once(Events.ClientReady, (clientUser) => {
+    console.log(`We are now in ${clientUser.user.tag}`)
+})
+
+client.login(process.env.BOT_TOKEN)
+```
+The first line initializes the discord bot client and the second like authenticates it via the bot token that's hidden in the .env file
+
+```javascript
+const BOT_CHANNEL ="1093540186853474397"
+const PAST_MESSAGES = 5
+```
+`BOT_CHANNEL` variable holds the ID of the channel in which the bot should process messages while the `PAST_MESSAGES` variable holds the number of previous messages the bot should fetch and use as context for generating its response.
+
+```javascript
+client.on(Events.MessageCreate, async (message)=>{
+})
+```
+This piece of code sets up an event listener for when a message is created in the channel. I'll explain the code inside it below
+
+
+
+
+
